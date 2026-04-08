@@ -42,4 +42,16 @@ public class Recording {
   public String toString() {
     return String.format("{ %s | %s | %s | %d | %s }", artist, title, genre, year, type);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    //om objektet är samma returnera true
+    if (this == o) return true;
+    //om objektet är tomt eller objektsklassen är en annan returerna false
+    if (o == null || getClass() != o.getClass()) return false;
+    //förenklar kodläsning med lokal variabel
+    Recording o1 = (Recording) o;
+    //kollar om år, artist och titel är samma i objektet
+    return year==(o1.getYear()) && artist.equals(o1.getArtist()) && title.equals(o1.getTitle());
+  }
 }

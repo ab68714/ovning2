@@ -1,20 +1,17 @@
 package se.su.ovning2;
 
-import java.util.Collection;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Searcher implements SearchOperations {
-  TreeSet<Recording> treeSet = new TreeSet<Recording>();
+  //TreeSet<Recording> treeSet = new TreeSet<>();
   TreeMap<String, Recording> treeMap = new TreeMap <>();
 
   public Searcher(Collection<Recording> data) {
-    treeSet.addAll(data);
+   // treeSet.addAll(data);
 
-    for (Recording d : data){
-      treeMap.put(d.getArtist(),d);
-    } //??
+   // for (Recording d : data){
+      //treeMap.put(d.getArtist(),d);
+   // } //??
 
     Collection<Recording> recordings = data;
   }
