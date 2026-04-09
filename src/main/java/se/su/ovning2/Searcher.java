@@ -14,12 +14,11 @@ public class Searcher implements SearchOperations {
 
   public Searcher(Collection<Recording> data) {
 
-
-
     for (Recording r : data){
       Set<Recording> byArtist = recordingsByArtist.get(r.getArtist());
       Set<Recording> byTitle = recordingsByTitle.get(r.getTitle());
       Set<Recording> byYear = recordingsByYear.get(r.getYear());
+
       if (byArtist == null) {
         byArtist = new HashSet<>();
         recordingsByArtist.put(r.getArtist(), byArtist);
@@ -41,16 +40,10 @@ public class Searcher implements SearchOperations {
        Set<Recording> byGenre = recordingsByGenre.get(s);
        if (byGenre == null) {
          byGenre = new HashSet<>();
-
        }
        recordingsByGenre.put(s, byGenre);
      }
-
     }
-
-
-
-
   }
 
   @Override
@@ -90,7 +83,6 @@ public class Searcher implements SearchOperations {
 
   @Override
   public Recording getRecordingByName(String title) {
-
     return recordingsByTitle.get(title).iterator().next();
     // TODO Auto-generated method stub
     //throw new UnsupportedOperationException("Unimplemented method 'getRecordingByName'");
@@ -98,10 +90,15 @@ public class Searcher implements SearchOperations {
 
   @Override
   public Collection<Recording> getRecordingsAfter(int year) {
-   // return recordingsByYear.tailMap(year);
+    List<Recording> result = new ArrayList<>();
 
+    for (Set<Recording> set : recordingsByYear.tailMap(year).values()) {
+      result.addAll(set);
+    }
+
+    return result;
+   // vet inte om man får göra såhär, men vi behöver en collection som returtyp
     // TODO Auto-generated method stub
-   throw new UnsupportedOperationException("Unimplemented method 'getRecordingsAfter'");
   }
 
   @Override
