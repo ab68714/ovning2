@@ -55,4 +55,9 @@ public class Recording {
     //kollar om objekt e samma
     return year==(o1.getYear()) && artist.equals(o1.getArtist()) && title.equals(o1.getTitle());
   }
+
+  /*@Override
+  public int compareTo (Recording recording){
+
+  }*/
 }
