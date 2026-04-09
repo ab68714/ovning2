@@ -5,12 +5,14 @@ import java.util.*;
 public class Searcher implements SearchOperations {
 
   Map<String, Set<Recording>> collection = new HashMap <>();
+  Set<Recording> recordings = new HashSet<>();
 
   public Searcher(Collection<Recording> data) {
 
 
     for (Recording d : data){
       collection.put(d.getArtist(), Collections.singleton(d));
+      recordings.add(d);
     } //??
 
 
@@ -38,7 +40,7 @@ public class Searcher implements SearchOperations {
   public boolean doesArtistExist(String name) {
     return (collection.containsKey(name));
     // TODO Auto-generated method stub
-   // throw new UnsupportedOperationException("Unimplemented method 'doesArtistExist'");
+   //throw new UnsupportedOperationException("Unimplemented method 'doesArtistExist'");
   }
 
   @Override

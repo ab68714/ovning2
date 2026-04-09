@@ -16,6 +16,7 @@ public class Recording {
     this.artist = artist;
     this.type = type;
     this.genre = genre;
+
   }
 
   public String getArtist() {
@@ -51,7 +52,7 @@ public class Recording {
     if (o == null || getClass() != o.getClass()) return false;
     //förenklar kodläsning med lokal variabel
     Recording o1 = (Recording) o;
-    //kollar om år, artist och titel är samma i objektet
+    //kollar om objekt e samma
     return year==(o1.getYear()) && artist.equals(o1.getArtist()) && title.equals(o1.getTitle());
   }
 }
