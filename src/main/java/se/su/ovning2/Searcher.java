@@ -14,10 +14,8 @@ public class Searcher implements SearchOperations {
   public Searcher(Collection<Recording> data) {
 
     for (Recording r : data){
-
       Set<Recording> byArtist = recordingsByArtist.get(r.getArtist());
       Set<Recording> byTitle = recordingsByTitle.get(r.getTitle());
-
       if (byArtist == null) {
         byArtist = new HashSet<>();
         recordingsByArtist.put(r.getArtist(), byArtist);
@@ -29,6 +27,15 @@ public class Searcher implements SearchOperations {
        recordingsByTitle.put(r.getTitle(), byTitle);
      }
      byTitle.add(r);
+
+     for(String s: r.getGenre()){
+       Set<Recording> byGenre = recordingsByGenre.get(s);
+       if (byGenre == null) {
+         byGenre = new HashSet<>();
+
+       }
+       recordingsByGenre.put(s, byGenre);
+     }
 
     }
 
@@ -46,8 +53,9 @@ public class Searcher implements SearchOperations {
 
   @Override
   public long numberOfGenres() {
+    return recordingsByGenre.size();
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'numberOfGenres'");
+   // throw new UnsupportedOperationException("Unimplemented method 'numberOfGenres'");
   }
 
   @Override
