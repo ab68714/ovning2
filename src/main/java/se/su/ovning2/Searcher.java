@@ -18,9 +18,7 @@ public class Searcher implements SearchOperations {
       recordingsByYear.computeIfAbsent(r.getYear(), k -> new HashSet<>()).add(r);
 
       for (String genre : r.getGenre()) {
-        recordingsByGenre
-                .computeIfAbsent(genre, k -> new HashSet<>())
-                .add(r);
+        recordingsByGenre.computeIfAbsent(genre, k -> new HashSet<>()).add(r);
       }
     }
 
