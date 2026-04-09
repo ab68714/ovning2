@@ -1,6 +1,8 @@
 package se.su.ovning2;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Recording {
@@ -45,15 +47,19 @@ public class Recording {
   }
 
   @Override
-  public boolean equals(Object o) {
-    //om objektet är samma returnera true
-    if (this == o) return true;
-    //om objektet är tomt eller objektsklassen är en annan returerna false
-    if (o == null || getClass() != o.getClass()) return false;
-    //förenklar kodläsning med lokal variabel
-    Recording o1 = (Recording) o;
-    //kollar om objekt e samma
-    return year==(o1.getYear()) && artist.equals(o1.getArtist()) && title.equals(o1.getTitle());
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+
+    Recording other = (Recording) obj;
+
+    return year == other.year &&
+            artist.equals(other.artist) &&
+            title.equals(other.title);
+  }
+  @Override
+  public int hashCode() {
+    return Objects.hash(title, artist, year);
   }
 
   /*@Override
