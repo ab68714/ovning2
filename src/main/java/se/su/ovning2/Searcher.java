@@ -1,28 +1,30 @@
 package se.su.ovning2;
 
-import java.util.Collection;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Searcher implements SearchOperations {
-  TreeSet<Recording> treeSet = new TreeSet<Recording>();
-  TreeMap<String, Recording> treeMap = new TreeMap <>();
+  //TreeSet<Recording> treeSet = new TreeSet<Recording>();
+  //TreeMap<String, Recording> treeMap = new TreeMap <>();
+
+  private final Map<String, Set<Recording>> recordingsByArtist = new HashMap<>();
 
   public Searcher(Collection<Recording> data) {
-    treeSet.addAll(data);
 
-    for (Recording d : data){
-      treeMap.put(d.getArtist(),d);
-    } //??
-
-    Collection<Recording> recordings = data;
+    for (Recording r : data){
+      Set<Recording> byArtist = recordingsByArtist.get(r.getArtist());
+      if (byArtist == null) {
+        byArtist = new HashSet<>();
+        recordingsByArtist.put(r.getArtist(), byArtist);
+      }
+      byArtist.add(r);
+    }
   }
 
   @Override
   public long numberOfArtists() {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'numberOfArtists'");
+    // throw new UnsupportedOperationException("Unimplemented method 'numberOfArtists'");
+    return recordingsByArtist.size();
   }
 
   @Override
@@ -40,7 +42,7 @@ public class Searcher implements SearchOperations {
   @Override
   public boolean doesArtistExist(String name) {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'doesArtistExist'");
+    //throw new UnsupportedOperationException("Unimplemented method 'doesArtistExist'");
   }
 
   @Override
