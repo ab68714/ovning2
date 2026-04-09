@@ -3,17 +3,17 @@ package se.su.ovning2;
 import java.util.*;
 
 public class Searcher implements SearchOperations {
-  //TreeSet<Recording> treeSet = new TreeSet<>();
-  TreeMap<String, Recording> treeMap = new TreeMap <>();
+
+  Map<String, Set<Recording>> collection = new HashMap <>();
 
   public Searcher(Collection<Recording> data) {
-   // treeSet.addAll(data);
 
-   // for (Recording d : data){
-      //treeMap.put(d.getArtist(),d);
-   // } //??
 
-    Collection<Recording> recordings = data;
+    for (Recording d : data){
+      collection.put(d.getArtist(), Collections.singleton(d));
+    } //??
+
+
   }
 
   @Override
@@ -36,8 +36,9 @@ public class Searcher implements SearchOperations {
 
   @Override
   public boolean doesArtistExist(String name) {
+    return (collection.containsKey(name));
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'doesArtistExist'");
+   // throw new UnsupportedOperationException("Unimplemented method 'doesArtistExist'");
   }
 
   @Override
