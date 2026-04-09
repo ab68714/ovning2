@@ -6,6 +6,7 @@ public class Searcher implements SearchOperations {
   //TreeSet<Recording> treeSet = new TreeSet<Recording>();
   //TreeMap<String, Recording> treeMap = new TreeMap <>();
   private final Set<Recording> recordings =new HashSet<>();
+  private final TreeMap<Integer,Set<Recording>> recordingsByYear = new TreeMap<>();
 
   private final Map<String, Set<Recording>> recordingsByArtist = new HashMap<>();
   private final Map<String, Set<Recording>> recordingsByGenre = new HashMap<>();
@@ -13,14 +14,22 @@ public class Searcher implements SearchOperations {
 
   public Searcher(Collection<Recording> data) {
 
+
+
     for (Recording r : data){
       Set<Recording> byArtist = recordingsByArtist.get(r.getArtist());
       Set<Recording> byTitle = recordingsByTitle.get(r.getTitle());
+      Set<Recording> byYear = recordingsByYear.get(r.getYear());
       if (byArtist == null) {
         byArtist = new HashSet<>();
         recordingsByArtist.put(r.getArtist(), byArtist);
       }
       byArtist.add(r);
+      if(byYear == null) {
+        byYear = new HashSet<>();
+        recordingsByYear.put(r.getYear(), byYear);
+      }
+      byYear.add(r);
 
      if (byTitle == null) {
        byTitle = new HashSet<>();
@@ -74,20 +83,25 @@ public class Searcher implements SearchOperations {
 
   @Override
   public Collection<String> getGenres() {
+    return recordingsByGenre.keySet();
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getGenres'");
+   // throw new UnsupportedOperationException("Unimplemented method 'getGenres'");
   }
 
   @Override
   public Recording getRecordingByName(String title) {
+
+    return recordingsByTitle.get(title).iterator().next();
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getRecordingByName'");
+    //throw new UnsupportedOperationException("Unimplemented method 'getRecordingByName'");
   }
 
   @Override
   public Collection<Recording> getRecordingsAfter(int year) {
+   // return recordingsByYear.tailMap(year);
+
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getRecordingsAfter'");
+   throw new UnsupportedOperationException("Unimplemented method 'getRecordingsAfter'");
   }
 
   @Override
