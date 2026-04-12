@@ -8,6 +8,7 @@ public class Searcher implements SearchOperations {
   private final TreeMap<String, Set<Recording>> recordingsByArtist = new TreeMap<>();
   private final TreeMap<String, Set<Recording>> recordingsByGenre = new TreeMap<>();
   private final TreeMap<String, Set<Recording>> recordingsByTitle = new TreeMap<>();
+  private final Set<Recording> result = new HashSet<>();
 
   public Searcher(Collection<Recording> data) {
 
@@ -62,7 +63,6 @@ public class Searcher implements SearchOperations {
   @Override
   public Collection<Recording> getRecordingsAfter(int year) { //set
 
-    Set<Recording> result = new HashSet<>();
     for (Set<Recording> set : recordingsByYear.tailMap(year).values()) {
       result.addAll(set);
     }
@@ -95,25 +95,23 @@ public class Searcher implements SearchOperations {
   @Override
   public Collection<Recording> getRecordingsByGenreAndYear(String genre, int yearFrom, int yearTo) {
 
-    Set<Recording> results = new HashSet<>();
+
 //chatgpt
     for (Map.Entry<Integer, Set<Recording>> e :
             recordingsByYear.subMap(yearFrom, true, yearTo, true).entrySet()) {
 
       for (Recording r : e.getValue()) {
         if (r.getGenre().contains(genre)) {
-          results.add(r);
+          result.add(r);
         }
       }
     }
 
-    return Collections.unmodifiableSet(results);
+    return Collections.unmodifiableSet(result);
   }
 
   @Override
   public Collection<Recording> offerHasNewRecordings(Collection<Recording> newRecordings) {
-
-    Set<Recording> result = new HashSet<>();
 
     for (Recording r : newRecordings) {
       if (!recordings.contains(r)) {
