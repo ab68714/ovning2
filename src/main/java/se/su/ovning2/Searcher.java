@@ -3,7 +3,7 @@ package se.su.ovning2;
 import java.util.*;
 
 public class Searcher implements SearchOperations {
-  private final Collection<Recording> recordings =new HashSet<>();
+  private final Collection<Recording> recordings = new HashSet<>();
   private final TreeMap<Integer,Set<Recording>> recordingsByYear = new TreeMap<>();
   private final TreeMap<String, Set<Recording>> recordingsByArtist = new TreeMap<>();
   private final TreeMap<String, Set<Recording>> recordingsByGenre = new TreeMap<>();
