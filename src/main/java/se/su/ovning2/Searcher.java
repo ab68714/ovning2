@@ -94,8 +94,6 @@ public class Searcher implements SearchOperations {
 
   @Override
   public Collection<Recording> getRecordingsByGenreAndYear(String genre, int yearFrom, int yearTo) {
-
-
 //chatgpt
     for (Map.Entry<Integer, Set<Recording>> e :
             recordingsByYear.subMap(yearFrom, true, yearTo, true).entrySet()) {
